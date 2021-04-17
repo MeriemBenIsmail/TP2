@@ -13,7 +13,7 @@ include_once('head.php');
     <div class="container">
         <form action="login.php" method="post">
             <div class="form-group">
-                <label for="username">Username</label>
+                <label for="username">Usernames</label>
                 <input type="text" class="form-control" id="username" name="user" placeholder="Enter username">
             </div>
             <div class="form-group">
