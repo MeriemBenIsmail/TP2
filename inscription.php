@@ -1,9 +1,11 @@
 <?php
 session_start();
-var_dump($_SESSION);
-if (isset($_SESSION['username'])) {
+
+if (isset($_SESSION['user'])) {
     header('location:acceuil.php');
 }
+
+
 $title = "Inscription";
 include_once('head.php');
 
@@ -11,18 +13,35 @@ include_once('head.php');
 
 <body>
     <div class="container">
-        <form action="login.php" method="post">
+        <form action="inscriptionProcess.php" method="post">
+        <?php if (isset($_SESSION['usernameUsed'])) { ?>
+                <div class="alert alert-danger"><?= $_SESSION['usernameUsed'] ?></div>
+            <?php }
+            unset($_SESSION['usernameUsed']);
+        ?>
+
+        <?php if (isset($_SESSION['shortPwdError'])) { ?>
+                <div class="alert alert-danger"><?= $_SESSION['shortPwdError'] ?></div>
+            <?php }
+            unset($_SESSION['shortPwdError']);
+        ?>
+
+        <?php if (isset($_SESSION['requiredFieldsError'])) { ?>
+                <div class="alert alert-danger"><?= $_SESSION['requiredFieldsError'] ?></div>
+            <?php }
+            unset($_SESSION['requiredFieldsError']);
+        ?>
             <div class="form-group">
-                <label for="username">Usernames</label>
-                <input type="text" class="form-control" id="username" name="user" placeholder="Enter username">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" name="username" placeholder="Enter username">
             </div>
             <div class="form-group">
                 <label for="exampleInputPassword1">Password</label>
                 <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="Password">
             </div>
-            <button type="submit" name="signup" class="btn btn-primary">Sign up</button>
+            <button type="submit" class="btn btn-primary">Sign up</button>
         </form>
-        <a href="inscription.php" class="btn btn-info">Inscrivez-vous</a>
+        
     </div>
 </body>
 

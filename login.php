@@ -1,20 +1,10 @@
 <?php
-include_once("autoload.php");
 session_start();
+
 if (isset($_SESSION['user'])) {
-    header('location:home.php');
+    header('location:acceuil.php');
 }
-if (isset($_POST['signup'])) {
-    if ((isset($_POST['username'])) && (isset($_POST['pass']))) {
-        $username = $_POST['user'];
-        $pass = $_POST['password'];
-        $user = new UserRepository();
-        $response = $user->add($username, $pass);
-        if (!$response) {
-            header('location:inscription.php');
-        }
-    }
-}
+
 
 $title = "Login";
 include_once('head.php');
@@ -23,11 +13,11 @@ include_once('head.php');
 
 <body>
     <div class="container">
-        <form action="acceuil.php" method="post">
-            <?php if (isset($_SESSION['error'])) { ?>
-                <div class="alert alert-danger"><?= $_SESSION['error'] ?></div>
+        <form action="loginProcess.php" method="post">
+            <?php if (isset($_SESSION['IncorrectFieldsError'])) { ?>
+                <div class="alert alert-danger"><?= $_SESSION['IncorrectFieldsError'] ?></div>
             <?php }
-            unset($_SESSION['error']);
+            unset($_SESSION['IncorrectFieldsError']);
             ?>
             <div class="form-group">
                 <label for="username">Username</label>
@@ -35,9 +25,9 @@ include_once('head.php');
             </div>
             <div class="form-group">
                 <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control" name="pass" id="exampleInputPassword1" placeholder="Password">
+                <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="Password">
             </div>
-            <button type="submit" name="login" class="btn btn-primary">Logn in</button>
+            <button type="submit" class="btn btn-primary">Login</button>
         </form>
         <a href="inscription.php" class="btn btn-info">Inscrivez-vous</a>
     </div>

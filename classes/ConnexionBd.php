@@ -4,7 +4,7 @@ class ConnexionBD
 {
     private static $_dbname = "tpphp";
     private static $_user = "root";
-    private static $_pwd = "123456";
+    private static $_pwd = "";
     private static $_host = "localhost";
     private static $_bdd = null;
 
